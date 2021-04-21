@@ -2,7 +2,7 @@ let c=document.getElementById("myCanvas");
 let cntxt=c.getContext("2d");
 
 c.width=1418;
-c.height=520;
+c.height=530;
 
 cntxt.font="30px Comic Sans MS";
 cntxt.fillStyle = "red";
@@ -22,27 +22,33 @@ let images={idle:[1,2,3,4,5,6,7,8],kick:[1,2,3,4,5,6,7],punch:[1,2,3,4,5,6,7],mo
 
 let backGround=(mode)=>{
     if(mode==="Day"){
-    c.style.background = "url('images/background/bg3.jpg')";}
+    c.style.background = "url('images/background/bg2.jpg')";}
     else if(mode==="Night"){
-        c.style.background = "url('images/background/bg2.jpg')";}
+        c.style.background = "url('images/background/bg3.jpg')";}
     
 }
 
 
-let music=()=>{
-    // let audio=document.createElement("audio");
-    // audio.src="music/doomsgate.mp3";
-    // audio.play();
-    let audio=new Audio("music/doomsgate.mp3");
-    if(typeof audio.loop=='boolean'){audio.loop=true;}
-    else{
-        audio.addEventListener("ended",function(){
-            this.currentTime=0;
-            this.play();
-        },false);
+let updateSound=()=>{
+    let audio=document.getElementById("audio");
+    let sound=document.getElementById("sound");
+    if(sound.value=="Sound"){
+        if(typeof audio.loop=='boolean'){audio.loop=true;}
+        else{
+            audio.addEventListener("ended",function(){
+                this.currentTime=0;
+                this.play();
+            },false);
+        }
+        sound.value="NoSound";
+        audio.play();
     }
-    audio.play();
-}
+    else{
+        audio.pause();
+        sound.value="Sound";
+
+    }
+} 
 
 let updateMode=()=>{
 let mode=document.getElementById("mode");
@@ -221,10 +227,6 @@ loadImages((imageArr)=>{
         window.location.reload();
     };
 
-    document.getElementById("sound").onclick=()=>{
-        music();
-    }
-
     document.addEventListener("keyup",(event)=>{
         const key=event.key;
         if(key==="ArrowLeft"){
@@ -251,8 +253,12 @@ loadImages((imageArr)=>{
 
 
 let startGame=()=>{
-backGround("Night");
+backGround("Day");
 document.getElementById("mode").onclick=()=>{updateMode();}
+document.getElementById("sound").onclick=()=>{
+    updateSound();
+}
+
 document.getElementById("home").onclick=()=>{location.href="index.html";}
 
 }
