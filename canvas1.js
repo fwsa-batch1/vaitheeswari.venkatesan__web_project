@@ -1,8 +1,8 @@
 let c=document.getElementById("myCanvas");
 let cntxt=c.getContext("2d");
 
-c.width=1418;
-c.height=500;
+c.width=window.innerWidth;
+c.height=window.innerHeight;
 
 cntxt.font="30px Comic Sans MS";
 cntxt.fillStyle = "red";
