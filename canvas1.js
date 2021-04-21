@@ -128,22 +128,31 @@ let walkCollide=()=>{
     let dx = monsstartX-imgstartX;
     let dy = monsstartY-imgstartY;
     let distance=Math.sqrt(dx*dx+dy*dy);
-    if(distance < monsWidth+10 || imgstartX>1250){
-        win();
-
+    console.log(Math.sqrt(distance));
+    if(Math.sqrt(distance)< monsWidth/11 || imgstartX>1200){
+        gameOver();
+        monsstartX=1250
     }
     else{
         score=score+1;       
     }
         
 }
-let win=()=>{
-    let text="Your Score : "+score+"\nWant to Play a New Game";
+let gameOver=()=>{
+    let text="You Lost ! \n Your Score : "+score+"\nWant to Play a New Game";
         let r = confirm(text);
         if (r == true) {
             window.location.reload();
         }
     }
+let win=()=>{
+    let text="You Won ! \n Your Score : "+score+"\nWant to Play a New Game";
+    let r = confirm(text);
+    if (r == true) {
+        window.location.reload();
+    }
+
+}
 
 let actionCollide=()=>{
     let distance = monsstartX-imgstartX;
