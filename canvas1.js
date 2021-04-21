@@ -8,7 +8,7 @@ cntxt.font="30px Comic Sans MS";
 cntxt.fillStyle = "red";
 
 let imgstartX=0;
-let imgstartY=300;
+let imgstartY=260;
 let imgWidth=260;
 let imgHeight=300;
 let monsWidth=150;
@@ -197,15 +197,15 @@ loadImages((imageArr)=>{
     };
 
     let jumpDown=document.getElementById("jumpD").onclick=()=>{
-        if(imgstartY<300){imgstartY=imgstartY+100;
+        if(imgstartY<260){imgstartY=imgstartY+100;
             }
-            else imgstartY=300;
+            else imgstartY=260;
     }
     let jumpUp=document.getElementById("jumpU").onclick=()=>{
-        if(imgstartY>200){imgstartY=imgstartY-100;
+        if(imgstartY>160){imgstartY=imgstartY-100;
             score=score+1;
             }
-            else imgstartY=300;
+            else imgstartY=260;
     }
     
     document.getElementById("refresh").onclick=()=>{
