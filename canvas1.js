@@ -2,7 +2,7 @@ let c=document.getElementById("myCanvas");
 let cntxt=c.getContext("2d");
 
 c.width=window.innerWidth;
-c.height=window.innerHeight;
+c.height=475;
 
 cntxt.font="30px Comic Sans MS";
 cntxt.fillStyle = "red";
