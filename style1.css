@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+}
+
+#myCanvas {
+  border: 2px solid #0f3063;
+}
+
+#kick,
+#jumpU,
+#jumpD,
+#home,
+#refresh,
+#walk,
+#punch {
+  margin-right: 1%;
+  padding: 5px 15px;
+  font-size: 24px;
+  color: rgb(3, 68, 44);
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  background-color: #5b5f97;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+#sound,
+#mode {
+  /* margin-left: 2%; */
+  padding: 2px 15px;
+  font-size: 18px;
+  color: rgb(3, 68, 44);
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  background-color: #95a735;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+#refresh,
+#home {
+  float: right;
+  background-color: #d34f55;
+  top: 50%;
+}
