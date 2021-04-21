@@ -8,7 +8,7 @@ cntxt.font="30px Comic Sans MS";
 cntxt.fillStyle = "red";
 
 let imgstartX=0;
-let imgstartY=200;
+let imgstartY=250;
 let imgWidth=260;
 let imgHeight=300;
 let monsWidth=150;
