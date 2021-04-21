@@ -13,7 +13,7 @@ let imgWidth=260;
 let imgHeight=300;
 let monsWidth=150;
 let monsHeight=150;
-let monsstartX=1300;
+let monsstartX=1250;
 let monsstartY=400;
 let score=0;
 
@@ -128,7 +128,7 @@ let walkCollide=()=>{
     let dx = monsstartX-imgstartX;
     let dy = monsstartY-imgstartY;
     let distance=Math.sqrt(dx*dx+dy*dy);
-    if(distance < monsWidth+10 || imgstartX>1300){
+    if(distance < monsWidth+10 || imgstartX>1250){
         win();
 
     }
@@ -150,7 +150,7 @@ let actionCollide=()=>{
     console.log(Math.sqrt(distance));
     if(Math.sqrt(distance) < monsWidth/8){
         score=score+10;
-        monsstartX=1300;
+        monsstartX=1250;
     }
    
 }
