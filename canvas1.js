@@ -1,20 +1,20 @@
 let c=document.getElementById("myCanvas");
 let cntxt=c.getContext("2d");
 
-c.width=window.innerWidth;
+c.width=1418;
 c.height=520;
 
 cntxt.font="30px Comic Sans MS";
 cntxt.fillStyle = "red";
 
 let imgstartX=0;
-let imgstartY=300;
+let imgstartY=250;
 let imgWidth=260;
 let imgHeight=300;
 let monsWidth=150;
 let monsHeight=150;
 let monsstartX=1300;
-let monsstartY=440;
+let monsstartY=400;
 let score=0;
 
 
@@ -197,15 +197,15 @@ loadImages((imageArr)=>{
     };
 
     let jumpDown=document.getElementById("jumpD").onclick=()=>{
-        if(imgstartY<300){imgstartY=imgstartY+100;
+        if(imgstartY<250){imgstartY=imgstartY+100;
             }
-            else imgstartY=300;
+            else imgstartY=250;
     }
     let jumpUp=document.getElementById("jumpU").onclick=()=>{
         if(imgstartY>200){imgstartY=imgstartY-100;
             score=score+1;
             }
-            else imgstartY=300;
+            else imgstartY=250;
     }
     
     document.getElementById("refresh").onclick=()=>{
