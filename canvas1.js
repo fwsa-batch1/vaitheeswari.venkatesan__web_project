@@ -149,36 +149,31 @@ let walkCollide=()=>{
     let dy = monsstartY-imgstartY;
     let distance=Math.sqrt(dx*dx+dy*dy);
     console.log(Math.sqrt(distance));
-    if(Math.sqrt(distance)< monsWidth/11 || imgstartX>1200){
+    if(Math.sqrt(distance)< monsWidth/11 || imgstartX>1200 && score-10>0){
         score=score-10;   
     }
-    else if(score<1){
-        gameOver();
-    }
-    else{
+    else if(score-10>0){
         score=score-5;       
     }
-        
+    else{
+        gameOver();
+    }
 }
 
 // function to pop up a  message displaying the score if the game got over 
 
 let gameOver=()=>{
     let text="You Lost ! \n Your Score : "+score+"\nWant to Play a New Game";
-        let r = confirm(text);
-        if (r == true) {
-            window.location.reload();
-        }
-    }
+    window.location.reload();
+    alert(text);
+}
 
 // function to pop up a winning message displaying the score if the player reaches the end point
 
 let win=()=>{
     let text="You Won ! \n Your Score : "+score+"\nWant to Play a New Game";
-    let r = confirm(text);
-    if (r == true) {
-        window.location.reload();
-    }
+    window.location.reload();
+    alert(text);
 
 }
 
@@ -238,8 +233,7 @@ loadImages((imageArr)=>{
     // to detect when "walk" button is clicked
     
     let walk=document.getElementById("walk").onclick=()=>{
-        if(imgstartX<(c.width-imgWidth) && imgstartY>140){imgstartX=imgstartX+100;
-            score=score+2;
+        if(imgstartX<(c.width-imgWidth) && imgstartY>140){imgstartX=imgstartX+50;
             }
             else if(score>1 && imgstartY>140 ) win();
         
