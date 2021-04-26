@@ -1,24 +1,26 @@
-let c=document.getElementById("myCanvas");
+let c=document.getElementById("myCanvas"); 
 let cntxt=c.getContext("2d");
 
-c.width=1418;
-c.height=530;
+c.width=1418;     // width of the Canvas
+c.height=530;     // height of the Canvas
 
 cntxt.font="30px Comic Sans MS";
 cntxt.fillStyle = "red";
 
-let imgstartX=0;
-let imgstartY=240;
-let imgWidth=260;
-let imgHeight=300;
-let monsWidth=150;
-let monsHeight=150;
-let monsstartX=1250;
-let monsstartY=400;
-let score=0;
+let imgstartX=0;       //player's starting position(x-coordinate)
+let imgstartY=240;     //player's starting position(y-coordinate)
+let imgWidth=260;      //width of the player
+let imgHeight=300;     //height of the player
+let monsWidth=150;     //width of the monster
+let monsHeight=150;    //height of the monster
+let monsstartX=1250;   //monster's starting position(x-coordinate)
+let monsstartY=400;    //monster's starting position(y-coordinate)
+let score=100;           //initial score
 
 
-let images={idle:[1,2,3,4,5,6,7,8],kick:[1,2,3,4,5,6,7],punch:[1,2,3,4,5,6,7],monster:[1]};
+let images={idle:[1,2,3,4,5,6,7,8],kick:[1,2,3,4,5,6,7],punch:[1,2,3,4,5,6,7],monster:[1]};  //images needed to be  loaded
+
+// function to change the Background
 
 let backGround=(mode)=>{
     if(mode==="Day"){
@@ -28,6 +30,7 @@ let backGround=(mode)=>{
     
 }
 
+// function to update the Sound
 
 let updateSound=()=>{
     let audio=document.getElementById("audio");
@@ -50,6 +53,8 @@ let updateSound=()=>{
     }
 } 
 
+// function to update the Mode
+
 let updateMode=()=>{
 let mode=document.getElementById("mode");
     if(mode.value==="Day"){
@@ -62,7 +67,7 @@ let mode=document.getElementById("mode");
     }
 }
 
-
+// function to load a single image
 
 let loadImage=(pathToImage,callback)=>{
 
@@ -73,10 +78,13 @@ let loadImage=(pathToImage,callback)=>{
     
 }
 
+// Function to return the image path 
+
 let imagePath=(action,imgNo)=>{
     return ("images/"+action+"/"+imgNo+".png");
 }
 
+// function to load multiple images
 
 let loadImages=(callback)=>{
     let imageArr={idle:[],kick:[],punch:[],monster:[]};
@@ -99,27 +107,32 @@ let loadImages=(callback)=>{
 
 }
 
-let drawImg=(image,imgstartX,imgstartY,imgWidth,imgHeight)=>{
-    cntxt.drawImage(image,imgstartX,imgstartY,imgWidth,imgHeight);
-}
+// function to animate the multiple loaded images
 
 let animate=(cntxt,action,imageArr,callback)=>{
         imageArr[action].forEach((image,index)=>{
             setTimeout(()=>{
                 cntxt.clearRect(0,0,c.width,c.height);
-                updateScore(score)
-                drawImg(image,imgstartX,imgstartY,imgWidth,imgHeight);
+                updateScore(score);
+                cntxt.drawImage(image,imgstartX,imgstartY,imgWidth,imgHeight);
             },index*100);
 
         });
         setTimeout(callback,imageArr[action].length*100);
         animateMonster(imageArr,100); 
-        walkCollide();  
+        if(action==="punch" || action === "kick")  {
+            setTimeout(()=>{actionCollide()},100);
+        }
+        walkCollide();
 }
-    
+
+//  function to draw the monster's image on Canvas
+
 let monster=(image)=>{
-    drawImg(image,monsstartX,monsstartY,monsWidth,monsHeight);
+    cntxt.drawImage(image,monsstartX,monsstartY,monsWidth,monsHeight);
 }
+
+// function to animate the monster's image
 
 let animateMonster=(imageArr,speed)=>{
     if(monsstartX>10){monsstartX=monsstartX-speed}
@@ -130,20 +143,27 @@ let animateMonster=(imageArr,speed)=>{
     
 }
 
+// function to detect if the  player  gets hit by the mosnter , if so game wil get ended  and if not score will be incremented by 1.
 let walkCollide=()=>{
     let dx = monsstartX-imgstartX;
     let dy = monsstartY-imgstartY;
     let distance=Math.sqrt(dx*dx+dy*dy);
     console.log(Math.sqrt(distance));
     if(Math.sqrt(distance)< monsWidth/11 || imgstartX>1200){
+        // monsstartX=1250
+        score=score-10;   
+    }
+    else if(score<1){
         gameOver();
-        monsstartX=1250
     }
     else{
-        score=score+1;       
+        score=score-5;       
     }
         
 }
+
+// function to pop up a  message displaying the score if the game got over 
+
 let gameOver=()=>{
     let text="You Lost ! \n Your Score : "+score+"\nWant to Play a New Game";
         let r = confirm(text);
@@ -151,6 +171,9 @@ let gameOver=()=>{
             window.location.reload();
         }
     }
+
+// function to pop up a winning message displaying the score if the player reaches the end point
+
 let win=()=>{
     let text="You Won ! \n Your Score : "+score+"\nWant to Play a New Game";
     let r = confirm(text);
@@ -159,6 +182,8 @@ let win=()=>{
     }
 
 }
+
+// function to detect if the player kicks or punches the monster and the score will get incremented by 10
 
 let actionCollide=()=>{
     let distance = monsstartX-imgstartX;
@@ -170,6 +195,7 @@ let actionCollide=()=>{
    
 }
 
+// function to update the score
 
 let updateScore=(score)=>{
     let text="Score : "+score;
@@ -177,9 +203,14 @@ let updateScore=(score)=>{
 
 }
 
+
 loadImages((imageArr)=>{
     let selectedAnime;
-    let queuedAnimations=[];
+
+    let queuedAnimations=[]; // to queue the actions
+
+    // function to detect the action
+
     let aux=()=>{
         if(queuedAnimations.length===0){
             selectedAnime="idle";
@@ -192,65 +223,82 @@ loadImages((imageArr)=>{
     }
     aux();
 
-    
+    // to detect when "punch" button is clicked
+
     document.getElementById("punch").onclick=()=>{
-        actionCollide();
         queuedAnimations.push("punch");
         
     };
     
+    // to detect when "kick" button is clicked
+    
     document.getElementById("kick").onclick=()=>{
         queuedAnimations.push("kick");
-        actionCollide();
     };
-
+    
+    // to detect when "walk" button is clicked
+    
     let walk=document.getElementById("walk").onclick=()=>{
-        if(imgstartX<(c.width-imgWidth)){imgstartX=imgstartX+100;
+        if(imgstartX<(c.width-imgWidth) && imgstartY>140){imgstartX=imgstartX+100;
+            score=score+2;
             }
-            else win();
+            else if(score>1 && imgstartY>140 ) win();
         
     };
 
+    // to detect when "jumpD" button is clicked
+    
     let jumpDown=document.getElementById("jumpD").onclick=()=>{
         if(imgstartY<240){imgstartY=imgstartY+100;
             }
             else imgstartY=240;
     }
+
+    // to detect when "jumpU" button is clicked
+    
     let jumpUp=document.getElementById("jumpU").onclick=()=>{
         if(imgstartY>140){imgstartY=imgstartY-100;
-            score=score+1;
+            score=score-2;
             }
             else imgstartY=240;
     }
-    
+
+    // to detect when "refresh" button is clicked
+
     document.getElementById("refresh").onclick=()=>{
         window.location.reload();
     };
 
+    //event listeners to detect the keys
+
     document.addEventListener("keyup",(event)=>{
         const key=event.key;
-        if(key==="ArrowLeft"){
-            queuedAnimations.push("kick");
-            actionCollide();
-            
+        switch(key){
+            case "ArrowLeft" :
+                queuedAnimations.push("kick");
+                break;
+            case "ArrowRight" :
+                queuedAnimations.push("punch");
+                break;
+                
+            case "ArrowDown":
+                jumpDown();
+                break;
+
+            case "ArrowUp":
+                jumpUp();
+                break;
+
+            case "w":
+                walk();
+                break;
         }
-        else if(key==="ArrowRight"){
-            queuedAnimations.push("punch");
-            actionCollide();
-        }
-        else if(key==="ArrowDown"){
-            jumpDown();
-        }
-        else if(key==="ArrowUp"){
-            jumpUp();
-        }
-        else if(key==="Tab"){
-            walk();
-        }
+        
 
     });
 });
 
+// main function
 
 let startGame=()=>{
 backGround("Day");
