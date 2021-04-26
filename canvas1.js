@@ -13,7 +13,7 @@ let imgWidth=260;      //width of the player
 let imgHeight=300;     //height of the player
 let monsWidth=150;     //width of the monster
 let monsHeight=150;    //height of the monster
-let monsstartX=1250;   //monster's starting position(x-coordinate)
+let monsstartX=1200;   //monster's starting position(x-coordinate)
 let monsstartY=400;    //monster's starting position(y-coordinate)
 let score=100;           //initial score
 
@@ -150,7 +150,6 @@ let walkCollide=()=>{
     let distance=Math.sqrt(dx*dx+dy*dy);
     console.log(Math.sqrt(distance));
     if(Math.sqrt(distance)< monsWidth/11 || imgstartX>1200){
-        // monsstartX=1250
         score=score-10;   
     }
     else if(score<1){
@@ -190,7 +189,7 @@ let actionCollide=()=>{
     console.log(Math.sqrt(distance));
     if(Math.sqrt(distance) < monsWidth/8){
         score=score+10;
-        monsstartX=1250;
+        monsstartX=1200;
     }
    
 }
