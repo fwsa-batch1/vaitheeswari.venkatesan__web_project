@@ -150,7 +150,7 @@ let walkCollide=()=>{
     let distance=Math.sqrt(dx*dx+dy*dy);
     console.log(Math.sqrt(distance));
     if(Math.sqrt(distance)< monsWidth/11 || imgstartX>1200 && score-10>0){
-        score=score-10;   
+        score=score-30;   
     }
     else if(score-10>0){
         score=score-5;       
@@ -163,7 +163,7 @@ let walkCollide=()=>{
 // function to pop up a  message displaying the score if the game got over 
 
 let gameOver=()=>{
-    let text="You Lost ! \n Your Score : "+score+"\nWant to Play a New Game";
+    let text="You Lost ! \nWant to Play a New Game";
     window.location.reload();
     alert(text);
 }
