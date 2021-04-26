@@ -15,7 +15,7 @@ let monsWidth=150;     //width of the monster
 let monsHeight=150;    //height of the monster
 let monsstartX=1200;   //monster's starting position(x-coordinate)
 let monsstartY=400;    //monster's starting position(y-coordinate)
-let score=100;           //initial score
+let score=105;           //initial score
 
 
 let images={idle:[1,2,3,4,5,6,7,8],kick:[1,2,3,4,5,6,7],punch:[1,2,3,4,5,6,7],monster:[1]};  //images needed to be  loaded
