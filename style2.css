@@ -40,6 +40,8 @@ h1 {
   padding: 10px 25px;
   font-size: 24px;
   color: rgb(3, 68, 44);
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
   font-family: "Comic Sans MS", "Comic Sans", cursive;
   text-align: center;
   cursor: pointer;
@@ -49,6 +51,14 @@ h1 {
   border-radius: 15px;
   box-shadow: 0 9px #999;
 }
+
+#helpBtn:active,
+#start:active {
+  background-color: #d34f55;
+  box-shadow: 0 6px #999;
+  transform: translateY(5px);
+}
+
 .helpBox {
   display: none;
   position: fixed;

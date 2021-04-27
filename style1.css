@@ -1,6 +1,7 @@
 body {
   margin: 0;
   overflow: hidden;
+  background-color: black;
 }
 
 #myCanvas {
@@ -19,6 +20,8 @@ body {
   color: rgb(3, 68, 44);
   font-family: "Comic Sans MS", "Comic Sans", cursive;
   text-align: center;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
   cursor: pointer;
   outline: none;
   background-color: #5b5f97;
@@ -28,6 +31,7 @@ body {
 }
 
 #sound,
+#pause,
 #mode {
   /* margin-left: 2%; */
   padding: 2px 13px;
@@ -36,6 +40,8 @@ body {
   font-family: "Comic Sans MS", "Comic Sans", cursive;
   text-align: center;
   cursor: pointer;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
   outline: none;
   background-color: #95a735;
   border: none;
@@ -48,4 +54,58 @@ body {
   float: right;
   background-color: #d34f55;
   top: 50%;
+}
+
+#kick:active,
+#jumpU:active,
+#jumpD:active,
+#walk:active,
+#punch:active {
+  background-color: #5b5f97;
+  box-shadow: 0 6px #999;
+  transform: translateY(5px);
+}
+
+#sound:active,
+#pause:active,
+#mode:active {
+  background-color: #95a735;
+  box-shadow: 0 6px #999;
+  transform: translateY(5px);
+}
+
+#home:active,
+#refresh:active {
+  background-color: #d34f55;
+  box-shadow: 0 6px #999;
+  transform: translateY(5px);
+}
+
+#refresh span,
+#home span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.7s;
+}
+
+#refresh span:after,
+#home span:after {
+  content: "\00bb";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -25px;
+  transition: 0.7s;
+}
+
+#refresh:hover span,
+#home:hover span {
+  padding-right: 30px;
+}
+
+#home:hover span:after,
+#refresh:hover span:after {
+  opacity: 1;
+  right: 0;
 }
